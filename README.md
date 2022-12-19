@@ -1,29 +1,39 @@
-# potok
+# Поток
 
-This template should help get you started developing with Vue 3 in Vite.
+Проект, созданный в рамках дисциплины "Потоки платежей"
+студентами второго курса Волжского филиала ВолГУ.
 
-## Recommended IDE Setup
+Авторы:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+* **Остапчук Анастасия** - *ПМИ-201*
+* **Ушакова Маргарита** - *ПМИ-202*
+* **Катунов Дмитрий** - *ПМИ-202*
 
-## Customize configuration
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Также есть [ссылка на работающий сайт](https://).
 
-## Project Setup
 
-```sh
+## Чтобы установить
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+### Компиляция и горячая перезагрузка для разработки
+```
+npm run serve
 ```
 
-### Compile and Minify for Production
-
-```sh
+### Компиляция и минимизация для продакшена
+```
 npm run build
 ```
+
+### Проверка и исправление ошибок
+```
+npm run lint
+```
+
+### Настройка конфигурации
+Смотри [Configuration Reference](https://cli.vuejs.org/config/).
+
+---
