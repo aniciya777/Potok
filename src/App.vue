@@ -1,15 +1,20 @@
 <template>
-  <header>
-    <MainHeader />
-  </header>
-
-  <main>
-
-  </main>
+  <div class="wrapper">
+    <header>
+      <MainHeader />
+    </header>
+    <div class="wrapper-content">
+      <main>
+        <BreadCrumbs />
+        <router-view />
+      </main>
+    </div>
+  </div>
 </template>
 
 <script setup>
   import MainHeader from "@/components/UI/MainHeader.vue";
+  import BreadCrumbs from "@/components/UI/BreadCrumbs.vue";
 </script>
 
 <style lang="scss">
@@ -28,6 +33,7 @@
 
   html {
     background: #41213f;
+    font-family: 'Montserrat', serif;
   }
 
   body {

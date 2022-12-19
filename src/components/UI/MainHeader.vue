@@ -1,19 +1,32 @@
 <template>
   <nav class="navbar sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <router-link class="navbar-brand" to="/">
         <img
             src="@/assets/logo.svg"
             alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-        <span>ПОТОК</span>
-      </a>
+        <span>{{ title }}</span>
+      </router-link>
+      <div class="navbar-items">
+        <router-link class="navbar-link" v-for="link in links" :key="link.alias" :to="link.url">
+          {{ link.title }}
+        </router-link>
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
+import {app, links} from "@/_config";
+
 export default {
-  name: "MainHeader"
+  name: "MainHeader",
+  data() {
+    return {
+      title: app.title,
+      links,
+    }
+  },
 }
 </script>
 
@@ -21,11 +34,11 @@ export default {
   nav {
     height: 70px;
     background: #67235E;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     color: #FFFFFF;
 
-    a.navbar-brand {
-      font-family: 'Strong';
+    .navbar-brand {
+      font-family: 'Strong',serif;
       font-style: normal;
       font-weight: 400;
       font-size: 48px;
@@ -34,6 +47,7 @@ export default {
       text-transform: uppercase;
       text-decoration: none;
       color: inherit;
+      float: left;
 
       img {
         width: 70px;
@@ -46,6 +60,22 @@ export default {
       span {
         padding-top: 6px;
         display: inline-block;
+      }
+    }
+
+    .navbar-items {
+      padding: 20px;
+      margin: auto 0;
+      float: right;
+
+      .navbar-link {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 25px;
+        line-height: 30px;
+        margin: 0 25px;
+        text-decoration: none;
+        color: inherit;
       }
     }
   }
