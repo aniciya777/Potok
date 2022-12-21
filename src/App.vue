@@ -4,7 +4,7 @@
       <MainHeader />
     </header>
     <div class="wrapper-content">
-      <main>
+      <main class="container">
         <BreadCrumbs />
         <router-view />
       </main>
@@ -34,6 +34,8 @@
   html {
     background: #41213f;
     font-family: 'Montserrat', serif;
+    font-style: normal;
+    font-weight: 400;
   }
 
   body {
@@ -41,6 +43,11 @@
   }
 
   main {
-    margin: 55px 10px;
+    margin: 18px 10px;
+    padding: 30px;
+    box-sizing: border-box;
+    background: rgba(30, 255, 188, 0.5);
+    border: 5px solid #1EFFBC;
+    border-radius: 20px;
   }
 </style>

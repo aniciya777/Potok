@@ -39,8 +39,6 @@ export default {
 
     .navbar-brand {
       font-family: 'Strong',serif;
-      font-style: normal;
-      font-weight: 400;
       font-size: 48px;
       line-height: 57px;
       text-align: justify;
@@ -69,8 +67,6 @@ export default {
       float: right;
 
       .navbar-link {
-        font-style: normal;
-        font-weight: 400;
         font-size: 25px;
         line-height: 30px;
         margin: 0 25px;

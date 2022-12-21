@@ -28,18 +28,17 @@ export default {
 <style scoped lang="scss">
   .breadcrumbs-component {
     padding: 5px 19px;
-    text-align: right;
-    //margin-bottom: -$header-footer-margin;
+    text-align: left;
   }
 
   .breadcrumbs-component__item {
-    //color: $breadcrumbs_gray;
+    color: white;
     text-decoration: underline;
   }
 
   .breadcrumbs-component__separator {
     padding: 0 5px;
-    //color: $breadcrumbs_gray;
+    opacity: 0.5;
   }
 
   .breadcrumbs-component__item_last {
