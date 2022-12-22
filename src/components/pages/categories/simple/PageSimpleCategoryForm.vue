@@ -58,6 +58,12 @@ export default {
   watch: {
     input_p() {
         this.getAnswer()
+    },
+    input_i() {
+      this.getAnswer()
+    },
+    input_n() {
+      this.getAnswer()
     }
   },
   methods: {
