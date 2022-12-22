@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="row">
-      <p class="text-center">
+      <p class="text-center text-footer">
         Получить лучшие консультации по инвестициям и процентам Вы можете получить на нашем сайте.
         Квалифицированные экономисты окажут помощь Вашим денежным средствам.
       </p>
@@ -41,22 +41,13 @@ export default {
 
 <style scoped lang="scss">
   h2 {
-    font-family: 'Montserrat', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 44px;
-    color: #FFFFFF;
+    font-size: 1.2rem;
   }
 
   .category-item {
     font-family: 'Roboto', 'Montserrat', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 47px;
+    font-size: 1.3rem;
     color: #000000;
-
     background: #FFFFFF;
     border-radius: 25px;
     display: block;
@@ -64,10 +55,8 @@ export default {
     padding: 18px 34px;
   }
 
-  p {
+  p.text-footer {
     margin-top: 81px - 34px;
     margin-bottom: 40px;
-    font-size: 25px;
-    line-height: 30px;
   }
 </style>

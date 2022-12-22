@@ -18,30 +18,7 @@ import BreadCrumbs from "@/components/UI/BreadCrumbs.vue";
 </script>
 
 <style lang="scss">
-@font-face {
-  font-family: "Montserrat";
-  src: local("Montserrat"),
-  url("@/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype"),
-  url("@/assets/fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Strong";
-  src: local("Strong"),
-  url("@/assets/fonts/Strong-Regular.ttf") format("truetype")
-}
-
-html {
-  background: #41213f;
-  font-family: 'Montserrat', serif;
-  font-style: normal;
-  font-weight: 400;
-  overflow-x: hidden;
-}
-
-body {
-  margin: 0;
-}
+@import "@/assets/styles/main.scss";
 
 main.container {
   margin-top: 18px;

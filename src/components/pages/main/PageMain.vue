@@ -17,7 +17,9 @@
       <p class="text-center main-page__paragraph">
         Проконсультироваться с ведущим экономистом проекта можно по телефону
         <br>
-        <a class="main-page__phone-link" href="tel:88005553535">8-800-555-35-35</a>
+        <a class="main-page__phone-link" href="tel:88005553535">
+          8-800-555-35-35
+        </a>
       </p>
     </div>
   </div>
@@ -34,13 +36,9 @@ export default {
     font-size: 64px;
     line-height: 78px;
     text-align: center;
-    margin: 0;
-    color: #FFFFFF;
   }
 
   .main-page__paragraph {
-    font-size: 30px;
-    line-height: 37px;
     margin-top: 45px;
   }
 </style>

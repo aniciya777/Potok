@@ -7,8 +7,6 @@ import "bootstrap/dist/css/bootstrap-grid.min.css";
 import "bootstrap/dist/css/bootstrap-utilities.min.css";
 import "bootstrap";
 
-import "@/assets/styles/main.scss"
-
 const app = createApp(App)
 app.use(routers);
 app.use(breadcrumbs, {
