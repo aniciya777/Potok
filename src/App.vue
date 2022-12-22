@@ -36,6 +36,7 @@ html {
   font-family: 'Montserrat', serif;
   font-style: normal;
   font-weight: 400;
+  overflow-x: hidden;
 }
 
 body {
