@@ -9,19 +9,19 @@
         <label for="input-p" class="form-label">
           Первоначальная сумма долга
         </label>
-        <input class="form-control" id="input-p" v-model.number="input_p">
+        <input class="form-control" id="input-p" v-model="input_p">
       </div>
       <div class="mb-3">
         <label for="input-i" class="form-label">
-          Ставка наращения процентов, %
+          Ставка наращения процентов
         </label>
-        <input class="form-control" id="input-i" v-model.number="input_i">
+        <input class="form-control" id="input-i" @change="set_i($event)" v-on:value="value_i">
       </div>
       <div class="mb-3">
         <label for="input-n" class="form-label">
           Срок ссуды, лет
         </label>
-        <input class="form-control" id="input-n" v-model.number="input_n">
+        <input class="form-control" id="input-n" v-model="input_n">
       </div>
       <hr>
       <h3 class="text-center">
@@ -44,25 +44,56 @@
 </template>
 
 <script>
-import { correctCalcDecorator } from '@/utils/correctCalcDecorator'
+import { correctCalcDecorator } from '@/utils/correctCalcDecorator';
+import { Valute, Percent } from '@/types/types';
 import * as assert from "assert";
 
 export default {
   name: "PageSimpleCategoryForm",
   data() {
     return {
-      input_p: 100000,
-      input_i: 10,
+      value_p: new Valute(100000),
+      value_i: new Percent(10),
       input_n: 5,
     }
   },
+  methods: {
+    set_i: function (value) {
+      let s = value.target.value.toString().replace(',', '.').replace(/[^.\d]/g, '');
+      this.value_i = new Percent(s);
+      console.log(value);
+    },
+  },
   computed: {
+    input_p: {
+      get() {
+        return this.value_p;
+      },
+      set(value) {
+        let s = value.toString().replace(/\D/g, '');
+        console.log(s);
+        this.value_p = new Valute(s / 100);
+      }
+    },
+    input_i: {
+      get() {
+        return this.value_i;
+      },
+      set(value) {
+        this.value_i = value;
+      }
+    },
     input_i_big: correctCalcDecorator(function () {
       assert (this.input_p > 0, "Первоначальная сумма долга должна быть больше нуля");
-      return this.input_p * this.input_i / 100 * this.input_n;
+      return new Valute(this.value_p * this.input_i / 100 * this.input_n);
     }),
-    input_s: function () {
-      return this.input_p + this.input_i_big;
+    input_s: correctCalcDecorator(function () {
+      return new Valute(this.value_p + this.input_i_big);
+    }),
+  },
+  watch: {
+    input_i: function (val, oldVal) {
+      console.log(val, oldVal);
     }
   },
 }
