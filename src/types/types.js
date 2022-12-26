@@ -1,4 +1,7 @@
-import { Valute} from "@/types/valute";
-import { Percent } from "@/types/percent";
+import { Valute, PositiveValute } from "@/types/valute";
+import { Percent, PositivePercent } from "@/types/percent";
 
-export { Valute, Percent };
+export {
+  Valute, PositiveValute,
+  Percent, PositivePercent
+};

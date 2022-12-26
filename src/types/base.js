@@ -1,38 +1,72 @@
 export class BaseCalculationType {
-  constructor(val) {
-    this.value = val;
-    this.error = null;
-  }
-  setValue(val) {
-    this._value = val;
-  }
-  get value() {
-    return this._value;
-  }
-  set value(value) {
-    if (value === null || value === undefined || isNaN(value)) {
-      this._value = undefined;
-      this.error = 'Некорректное значение';
-      return;
-    }
-    if (value === Infinity || value === -Infinity) {
-      this._value = undefined;
-      this.error = 'Значение слишком большое';
-      return;
-    }
-    this.setValue(value);
+
+  static fromInput(input) {
+    return this.fromString(input.value.toString());
   }
 
-  toString() {
-    if (this.error) {
-      return this.error;
+  static fromString(str) {
+    let val = str
+      .replace(',', '.')
+      .replace(/[^0-9.-]/g, '');
+    if (val !== '') {
+      val = val[0] + val.slice(1).replace('-', '');
     }
-    return this.value;
+    val += '.0';
+    if (val === '.') {
+      val = '';
+    }
+    if (val === '') {
+      val = 0;
+    }
+    console.log(str, val, parseFloat(val));
+    return new this(parseFloat(val));
+  }
+
+  constructor(val) {
+    this.error = null;
+    this.value = NaN;
+    this.setValue(val);
+  }
+
+  static onlyPositive() {
+    return false;
+  }
+
+  checkValue(value) {
+    if (value === null || value === undefined || isNaN(value)) {
+      this.value = NaN;
+      this.error = 'Некорректный результат';
+      return false;
+    } else if (value === Infinity || value === -Infinity) {
+      this.value = NaN;
+      this.error = 'Значение слишком большое';
+      return false;
+    } else if (this.constructor.onlyPositive() && value < 0) {
+      this.value = NaN;
+      this.error = 'Значение не может быть отрицательным';
+      return false;
+    }
+    this.value = value;
+    return true;
+  }
+
+  setValue(val) {
+    console.log('setValue', val);
+    if (!this.checkValue(val)) {
+      // throw new Error(this.error);
+    }
   }
 
   valueOf() {
     if (this.error) {
       throw new Error(this.error);
+    }
+    return this.value;
+  }
+
+  toString() {
+    if (this.error) {
+      return this.error;
     }
     return this.value;
   }

@@ -1,23 +1,28 @@
 import { BaseCalculationType } from './base';
 
-export class Percent extends BaseCalculationType {
-  get value() {
-    return this._value / 100;
-  }
+class Percent extends BaseCalculationType {
 
-  set value(value) {
-    super.value = value;
+  static fromInput(input) {
+    let obj = super.fromString(input.value.toString())
+    if (!obj.error) {
+      obj.value = Math.round(obj.value) / 100;
+    }
+    return obj;
   }
 
   setValue(value) {
-    this._value = Math.round(value * 100);
+    super.setValue(Math.round(value * 100));
+  }
+
+  valueOf() {
+    return super.valueOf() / 100;
   }
 
   toString() {
     if (this.error) {
       return this.error;
     }
-    const result = Intl.NumberFormat('ru-RU').format(this._value / 100);
+    const result = Intl.NumberFormat('ru-RU').format(this.value);
     if (~result.indexOf(',')) {
       return `${result} %`;
     } else {
@@ -25,3 +30,14 @@ export class Percent extends BaseCalculationType {
     }
   }
 }
+
+
+class PositivePercent extends Percent {
+
+    static onlyPositive() {
+      return true;
+    }
+}
+
+
+export { Percent, PositivePercent };
