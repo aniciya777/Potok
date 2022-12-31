@@ -22,6 +22,7 @@ import BreadCrumbs from "@/components/UI/BreadCrumbs.vue";
 
 main.container {
   margin-top: 18px;
+  margin-bottom: 32px;
   padding: 30px;
   box-sizing: border-box;
   background: rgba(30, 255, 188, 0.5);
