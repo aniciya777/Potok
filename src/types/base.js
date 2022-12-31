@@ -18,7 +18,6 @@ export class BaseCalculationType {
     if (val === '') {
       val = 0;
     }
-    console.log(str, val, parseFloat(val));
     return new this(parseFloat(val));
   }
 
@@ -51,7 +50,6 @@ export class BaseCalculationType {
   }
 
   setValue(val) {
-    console.log('setValue', val);
     if (!this.checkValue(val)) {
       // throw new Error(this.error);
     }
@@ -69,6 +67,17 @@ export class BaseCalculationType {
       return this.error;
     }
     return this.value;
+  }
+
+  reset() {
+    this.value = 0;
+    this.error = null;
+  }
+
+  resetError() {
+    if (this.error !== null) {
+      this.reset();
+    }
   }
 }
 

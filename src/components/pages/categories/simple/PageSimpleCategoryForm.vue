@@ -10,21 +10,27 @@
           Первоначальная сумма долга
         </label>
         <div class="input-group position-relative">
-          <input class="form-control" id="input-p" @change="set_p($event)" :value="value_p">
-          <button class="form-control__clear-btn">X</button>
+          <input class="form-control" id="input-p" @change="set_p($event)" @focusin="focus_p" :value="value_p">
+          <button class="form-control__clear-btn" @click="clear_p">X</button>
         </div>
       </div>
       <div class="mb-3">
         <label for="input-i" class="form-label">
           Ставка наращения процентов
         </label>
-        <input class="form-control" id="input-i" @change="set_i($event)" :value="value_i">
+        <div class="input-group position-relative">
+          <input class="form-control" id="input-i" @change="set_i($event)" @focusin="focus_i" :value="value_i">
+          <button class="form-control__clear-btn" @click="clear_i">X</button>
+        </div>
       </div>
       <div class="mb-3">
         <label for="input-n" class="form-label">
           Срок ссуды, лет
         </label>
-        <input class="form-control" id="input-n" v-model="input_n">
+        <div class="input-group position-relative">
+          <input class="form-control" id="input-n" @change="set_n($event)" @focusin="focus_n" :value="value_n">
+          <button class="form-control__clear-btn" @click="clear_n">X</button>
+        </div>
       </div>
       <hr>
       <h3 class="text-center">
@@ -44,11 +50,12 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import { correctCalcDecorator } from '@/utils/correctCalcDecorator';
-import { PositiveValute, PositivePercent } from '@/types/types';
+import { PositiveValute, PositivePercent, PositiveFloat } from '@/types/types';
 // import * as assert from "assert";
 
 export default {
@@ -57,35 +64,44 @@ export default {
     return {
       value_p: new PositiveValute(100000),
       value_i: new PositivePercent(0.1),
-      input_n: 5,
+      value_n: new PositiveFloat(5),
     }
   },
   methods: {
     set_i: function (event) {
       this.value_i = PositivePercent.fromInput(event.target);
     },
+    clear_i: function () {
+      this.value_i.reset();
+    },
+    focus_i: function () {
+      this.value_i.resetError();
+    },
     set_p: function (event) {
       this.value_p = PositiveValute.fromInput(event.target);
     },
+    clear_p: function () {
+      this.value_p.reset();
+    },
+    focus_p: function () {
+      this.value_p.resetError();
+    },
+    set_n: function (event) {
+      this.value_n = PositiveFloat.fromInput(event.target);
+    },
+    clear_n: function () {
+      this.value_n.reset();
+    },
+    focus_n: function () {
+      this.value_n.resetError();
+    },
   },
   computed: {
-    // input_p: {
-    //   get() {
-    //     return this.value_p;
-    //   },
-    //   set(value) {
-    //     let s = value.toString().replace(/\D/g, '');
-    //     console.log(s);
-    //     this.value_p = new Valute(s / 100);
-    //   }
-    // },
     input_i_big: correctCalcDecorator(function () {
-      return 0;
-      // return new Valute(this.value_p * this.value_i / 100 * this.input_n);
+      return new PositiveValute(this.value_p * this.value_i * this.value_n);
     }),
     input_s: correctCalcDecorator(function () {
-      return 0;
-      // return new Valute(this.value_p + this.input_i_big);
+      return new PositiveValute(this.value_p + this.input_i_big);
     }),
   },
 }

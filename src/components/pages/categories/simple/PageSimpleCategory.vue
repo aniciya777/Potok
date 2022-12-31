@@ -4,10 +4,8 @@
       Простые проценты
     </h1>
     <div class="row">
-      <div class="col-12 d-md-none">
-        <img src="@/assets/images/image_simple.png" class="figure-img rounded w-100" alt="Простые проценты">
-      </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12">
+        <img src="@/assets/images/image_simple.png" class="figure-img rounded w-50 float-end" alt="Простые проценты" >
         <p>
           К наращению по простым процентам обычно прибегают при выдаче краткосрочных ссуд (на срок до 1 года)
           или в случаях, когда проценты не присоединяются к сумме долга, а периодически выплачиваются.
@@ -15,41 +13,43 @@
         </p>
         <ul>
           <li>
-            <i>I</i> - проценты за весь срок ссуды:
+            <vue-latex :expression="'I'" :fontsize="latex_fontsize"/> - проценты за весь срок ссуды:
           </li>
           <li>
-            <i>Р</i> - первоначальная сумма долга;
+            <vue-latex :expression="'Р'" :fontsize="latex_fontsize"/> - первоначальная сумма долга;
           </li>
           <li>
-            <i>S</i> - наращенная сумма, т. е. сумма в конце срока:
+            <vue-latex :expression="'S'" :fontsize="latex_fontsize"/> - наращенная сумма, т. е. сумма в конце срока:
           </li>
           <li>
-            <i>i</i> - ставка наращения процентов (десятичная дробь);
+            <vue-latex :expression="'i'" :fontsize="latex_fontsize"/> - ставка наращения процентов (десятичная дробь);
           </li>
           <li>
-            <i>n</i> - срок ссуды.
+            <vue-latex :expression="'n'" :fontsize="latex_fontsize"/> - срок ссуды.
           </li>
         </ul>
         <p>
           Если срок измеряется в годах (как это обычно и бывает),
-          то <i>і</i> означает годовую процентную ставку, Соответственно каждый год приносит проценты в сумме
-          <i>Р⋅i</i>.
+          то <vue-latex :expression="'і'" :fontsize="latex_fontsize"/> означает годовую процентную ставку, Соответственно каждый год приносит проценты в сумме
+          <vue-latex :expression="'Р*i'" :fontsize="latex_fontsize"/>.
         </p>
         <p>
           Начисленные за весь срок проценты составят:
         </p>
         <p class="text-center">
-          <i>I = P⋅n⋅i</i>
+          <vue-latex
+            :expression="'I = P * n * i'"
+            display-mode :fontsize="latex_fontsize"/>
         </p>
         <p>
           Нарощенная сумма, таким образом, находится как:
         </p>
         <p class="text-center">
-          <i>S = P + I = P + P⋅n⋅i = P⋅(1 + n⋅i)</i>
+          <i></i>
+          <vue-latex
+            :expression="'I = S = P + I = P + P*n*i = P*(1 + n*i)'"
+            display-mode :fontsize="latex_fontsize"/>
         </p>
-      </div>
-      <div class="d-none d-md-block col-6">
-        <img src="@/assets/images/image_simple.png" class="figure-img rounded w-100" alt="Простые проценты">
       </div>
     </div>
     <PageSimpleCategoryForm />
@@ -61,7 +61,12 @@ import PageSimpleCategoryForm from "@/components/pages/categories/simple/PageSim
 
 export default {
   name: "PageSimpleCategory",
-  components: {PageSimpleCategoryForm}
+  components: {PageSimpleCategoryForm},
+  data() {
+    return {
+      latex_fontsize: 24,
+    };
+  },
 }
 </script>
 
