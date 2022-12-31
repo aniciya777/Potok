@@ -9,7 +9,7 @@
       </h2>
     </div>
     <div class="row">
-      <div class="col-12 col-md-6" v-for="category in categories" :key="category.name">
+      <div class="col-12 col-lg-6" v-for="category in categories" :key="category.name">
         <router-link class='category-item' :to="category.path">
           <div class="btn btn-primary btn-lg btn-block text-center">
             {{ category.meta.breadcrumb }}
