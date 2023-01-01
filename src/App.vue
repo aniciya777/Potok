@@ -1,8 +1,6 @@
 <template>
   <div class="wrapper">
-    <header>
-      <MainHeader/>
-    </header>
+    <MainHeader/>
     <div class="wrapper-content">
       <main class="container">
         <BreadCrumbs/>

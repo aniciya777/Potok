@@ -20,7 +20,7 @@
         </p>
         <ul>
           <li>
-            <vue-latex :expression="'n'" :fontsize="latex_fontsize"/> - срок заменяющей ренты.
+            <vue-latex :expression="'n'" :fontsize="latex_fontsize"/> - срок заменяющей ренты;
           </li>
           <li>
             <vue-latex :expression="'R_q'" :fontsize="latex_fontsize"/> - величина отдельного платежа (члена ренты);
