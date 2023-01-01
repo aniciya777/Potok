@@ -5,6 +5,7 @@ const routerHistory = createWebHashHistory();
 import PageMain from "@/components/pages/main/PageMain.vue";
 import PageAbout from "@/components/pages/about/PageAbout.vue";
 import PageCategories from "@/components/pages/categories/PageCategories.vue";
+import PageError_404 from "@/components/pages/_errors/PageError_404.vue";
 
 import {categories} from "@/components/categories";
 
@@ -37,6 +38,20 @@ const routers = createRouter({
         meta: {
           breadcrumb: 'Категории',
         },
+      },
+      {
+        path: '/404',
+        name: 'error_404',
+        component: PageError_404,
+        meta: {
+          breadcrumb: false,
+        },
+      },
+      {
+        path: '/:CatchAll(.*)',
+        redirect: {
+          name: 'error_404',
+        }
       },
     ].concat(categories),
   }

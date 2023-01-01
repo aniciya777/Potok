@@ -10,7 +10,9 @@
         </div>
         <div class="row employee-card__text-name">
           <p>
-            {{ employee.surname }} {{ employee.name }}
+            <strong>
+              {{ employee.surname }} {{ employee.name }}
+            </strong>
           </p>
         </div>
         <div class="row employee-card__text-position">

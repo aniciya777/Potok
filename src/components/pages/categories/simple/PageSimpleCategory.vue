@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page page-calculator">
     <h1 class="page__title">
       Простые проценты
     </h1>
@@ -58,24 +58,19 @@
 
 <script>
 import PageSimpleCategoryForm from "@/components/pages/categories/simple/PageSimpleCategoryForm.vue";
+import { app } from "@/_config.js";
 
 export default {
   name: "PageSimpleCategory",
   components: {PageSimpleCategoryForm},
   data() {
     return {
-      latex_fontsize: 24,
+      latex_fontsize: app.latex_fontsize,
     };
   },
 }
 </script>
 
 <style scoped lang="scss">
-  p, ul li {
-    font-family: 'Montserrat', serif;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
-  }
+
 </style>

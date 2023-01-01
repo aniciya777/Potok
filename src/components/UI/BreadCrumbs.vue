@@ -1,16 +1,16 @@
 <template>
-  <div class="breadcrumbs-component">
-  <p class="m-0">
-    <span v-for="(crumb, index) in breadcrumbs" :key="crumb.link">
-      <span v-if="index > 0" class="breadcrumbs-component__separator">/</span>
-      <router-link v-if="index < (breadcrumbs.length - 1)" class="breadcrumbs-component__item" :to="crumb.link">
-        {{ crumb.label }}
-      </router-link>
-      <span v-else class="breadcrumbs-component__item breadcrumbs-component__item_last">
-        {{ crumb.label }}
+  <div v-if="breadcrumbs.length > 1" class="breadcrumbs-component">
+    <p class="m-0">
+      <span v-for="(crumb, index) in breadcrumbs" :key="crumb.link">
+        <span v-if="index > 0" class="breadcrumbs-component__separator">/</span>
+        <router-link v-if="index < (breadcrumbs.length - 1)" class="breadcrumbs-component__item" :to="crumb.link">
+          {{ crumb.label }}
+        </router-link>
+        <span v-else class="breadcrumbs-component__item breadcrumbs-component__item_last">
+          {{ crumb.label }}
+        </span>
       </span>
-    </span>
-  </p>
+    </p>
   </div>
 </template>
 

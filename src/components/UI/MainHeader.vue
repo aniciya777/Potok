@@ -84,7 +84,7 @@ nav {
   }
 
   .navbar-items {
-    padding: 20px;
+    padding: 16px 20px;
     margin: auto 0;
     float: right;
 
@@ -119,13 +119,13 @@ nav {
 
   .navbar-toggler {
     background: white;
-    height: 48px;
-    width: 48px;
+    height: 60px;
+    width: 60px;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    margin: 10px;
+    margin: 5px 20px;
     float: right;
   }
 }

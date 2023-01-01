@@ -11,9 +11,9 @@
   url("@/assets/fonts/Strong-Regular.ttf") format("truetype")
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 580px) {
   html, body {
-    min-width: 770px
+    min-width: 580px
   }
 }
 
@@ -88,5 +88,29 @@ h2 {
 
   &.show {
     height: auto;
+  }
+}
+
+.page-error {
+  h1 {
+    &.error_code {
+      font-size: 170px;
+      margin-top: 0.4em;
+      height: 1em;
+    }
+  }
+
+  p {
+    font-size: 36px;
+  }
+}
+
+.page-calculator {
+  p, ul li {
+    font-family: 'Montserrat', serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
   }
 }
