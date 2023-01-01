@@ -1,5 +1,7 @@
 import PageSimpleCategory from "@/components/pages/categories/simple/PageSimpleCategory.vue";
 import PageCompound from "@/components/pages/categories/compound/PageCompoundCategory.vue";
+import PageRentConversionsCategory
+  from "@/components/pages/categories/rent_conversions/PageRentConversionsCategory.vue";
 
 export const categories = [
   {
@@ -21,7 +23,7 @@ export const categories = [
   {
     path: '/categories/rentconversions',
     name: 'rentconversions',
-    component: PageSimpleCategory,
+    component: PageRentConversionsCategory,
     meta: {
       breadcrumb: 'Конверсии рент',
     },

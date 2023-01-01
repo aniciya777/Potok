@@ -13,13 +13,13 @@
         </p>
         <ul>
           <li>
-            <vue-latex :expression="'I'" :fontsize="latex_fontsize"/> - проценты за весь срок ссуды:
+            <vue-latex :expression="'I'" :fontsize="latex_fontsize"/> - проценты за весь срок ссуды;
           </li>
           <li>
             <vue-latex :expression="'Р'" :fontsize="latex_fontsize"/> - первоначальная сумма долга;
           </li>
           <li>
-            <vue-latex :expression="'S'" :fontsize="latex_fontsize"/> - наращенная сумма, т. е. сумма в конце срока:
+            <vue-latex :expression="'S'" :fontsize="latex_fontsize"/> - наращенная сумма, т. е. сумма в конце срока;
           </li>
           <li>
             <vue-latex :expression="'i'" :fontsize="latex_fontsize"/> - ставка наращения процентов (десятичная дробь);
