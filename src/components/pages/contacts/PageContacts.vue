@@ -24,7 +24,7 @@
 
 <script>
 import {app} from "@/_config";
-import ContactsBlock from "@/components/UI/ContactsBlock";
+import ContactsBlock from "@/components/UI/ContactsBlock.vue";
 
 export default {
   name: "PageContacts",
