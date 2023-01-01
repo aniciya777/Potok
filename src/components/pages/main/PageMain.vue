@@ -17,8 +17,8 @@
       <p class="text-center main-page__paragraph">
         Проконсультироваться с ведущим экономистом проекта можно по телефону
         <br>
-        <a class="main-page__phone-link" href="tel:88005553535">
-          8-800-555-35-35
+        <a class="main-page__phone-link" :href="`tel:${phone}`">
+          {{ phone}}
         </a>
       </p>
     </div>
@@ -26,8 +26,15 @@
 </template>
 
 <script>
+import { app } from "@/_config";
+
 export default {
-  name: "PageMain"
+  name: "PageMain",
+  data () {
+    return {
+      phone: app.phones[0].phone_number,
+    };
+  },
 }
 </script>
 

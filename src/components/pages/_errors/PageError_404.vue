@@ -39,12 +39,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .row_quoted {
-    margin-top: 20px;
 
-    p, q {
-      font-size: 30px;
-      text-align: center;
-    }
-  }
 </style>

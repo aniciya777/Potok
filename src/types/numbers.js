@@ -15,7 +15,7 @@ class PositiveFloat extends Float {
     if (this.error) {
       return this.error;
     }
-    return parseFloat(this.value.toPrecision(12));
+    return parseFloat(this.value.toPrecision(12)).toString().replace('.', ',');
   }
 }
 

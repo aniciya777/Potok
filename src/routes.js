@@ -5,6 +5,7 @@ const routerHistory = createWebHashHistory();
 import PageMain from "@/components/pages/main/PageMain.vue";
 import PageAbout from "@/components/pages/about/PageAbout.vue";
 import PageCategories from "@/components/pages/categories/PageCategories.vue";
+import PageContacts from "@/components/pages/contacts/PageContacts.vue";
 import PageError_404 from "@/components/pages/_errors/PageError_404.vue";
 
 import {categories} from "@/components/categories";
@@ -37,6 +38,14 @@ const routers = createRouter({
         component: PageCategories,
         meta: {
           breadcrumb: 'Категории',
+        },
+      },
+      {
+        path: '/contacts',
+        name: 'contacts',
+        component: PageContacts,
+        meta: {
+          breadcrumb: 'Контакты',
         },
       },
       {

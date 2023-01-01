@@ -114,3 +114,12 @@ h2 {
     color: #FFFFFF;
   }
 }
+
+.row_quoted {
+  margin-top: 20px;
+
+  p, q {
+    font-size: 30px;
+    text-align: center;
+  }
+}

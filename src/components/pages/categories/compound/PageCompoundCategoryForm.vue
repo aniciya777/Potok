@@ -51,7 +51,7 @@
       </div>
       <div class="mb-3">
         <label for="input-i-big-p" class="form-label">
-          из них проценты на проценты
+          Проценты на проценты
         </label>
         <input type="text" class="form-control" id="input-i-big-p" v-model="input_i_big_p" readonly>
       </div>
@@ -66,7 +66,6 @@
 </template>
 
 <script>
-// import { correctCalcDecorator } from '@/utils/correctCalcDecorator';
 import { PositiveValute, PositivePercent, PositiveFloat } from '@/types/types';
 import {correctCalcDecorator} from "@/utils/correctCalcDecorator";
 
