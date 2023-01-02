@@ -50,7 +50,7 @@ export class BaseCalculationType {
   }
 
   setValue(val) {
-    if (!this.checkValue(val)) {
+    if (!this.checkValue(+val)) {
       // throw new Error(this.error);
     }
   }

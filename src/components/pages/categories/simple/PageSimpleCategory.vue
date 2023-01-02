@@ -16,7 +16,7 @@
             <vue-latex :expression="'I'" :fontsize="latex_fontsize"/> - проценты за весь срок ссуды;
           </li>
           <li>
-            <vue-latex :expression="'Р'" :fontsize="latex_fontsize"/> - первоначальная сумма долга;
+            <vue-latex :expression="'P'" :fontsize="latex_fontsize" strict="ignore"/> - первоначальная сумма долга;
           </li>
           <li>
             <vue-latex :expression="'S'" :fontsize="latex_fontsize"/> - наращенная сумма, т. е. сумма в конце срока;
@@ -29,9 +29,10 @@
           </li>
         </ul>
         <p>
-          Если срок измеряется в годах (как это обычно и бывает),
-          то <vue-latex :expression="'і'" :fontsize="latex_fontsize"/> означает годовую процентную ставку, Соответственно каждый год приносит проценты в сумме
-          <vue-latex :expression="'Р*i'" :fontsize="latex_fontsize"/>.
+          Если срок измеряется в годах (как это обычно и бывает), то
+          <vue-latex :expression="'i'" :fontsize="latex_fontsize" strict="ignore"/>
+          означает годовую процентную ставку, Соответственно каждый год приносит проценты в сумме
+          <vue-latex :expression="'P * i'" :fontsize="latex_fontsize" strict="ignore"/>.
         </p>
         <p>
           Начисленные за весь срок проценты составят:

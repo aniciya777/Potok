@@ -3,6 +3,7 @@ export const app = {
   description: "Поток",
   keywords: "Поток",
   latex_fontsize: 24,
+  days_in_year: 365,
   phones: [
     {
       name: "Основной",

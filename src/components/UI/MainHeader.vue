@@ -85,6 +85,16 @@ nav {
     }
   }
 
+  .navbar-link {
+    &:hover {
+      background: #5A1F4F;
+    }
+
+    &.router-link-exact-active {
+      background-color: #41213f;
+    }
+  }
+
   .navbar-items {
     padding: 0 20px;
     margin: auto 0;
@@ -99,10 +109,6 @@ nav {
       display: inline-block;
       text-decoration: none;
       color: inherit;
-
-      &.router-link-exact-active {
-        background-color: #41213f;
-      }
     }
   }
 
@@ -123,14 +129,6 @@ nav {
           padding-left: 40px;
           display: inline-block;
           width: 100%;
-
-          &:hover {
-            background: #5A1F4F;
-          }
-
-          &.router-link-exact-active {
-            background-color: #41213f;
-          }
         }
       }
     }
