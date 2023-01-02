@@ -95,7 +95,7 @@
 import CalculationInput from "@/components/UI/CalculationInput.vue";
 import ResultInput from "@/components/UI/ResultInput.vue";
 import { PositivePercent, PositiveValute, PositiveFloat, YearFormat } from '@/types/types';
-import * as assert from "assert";
+// import * as assert from "assert";
 import {correctCalcDecorator} from "@/utils/correctCalcDecorator";
 
 export default {
@@ -124,7 +124,7 @@ export default {
   methods: {
     addNewRent() {
       try {
-        let rent =new PositiveValute(this.value_rent_new);
+        let rent = new PositiveValute(this.value_rent_new);
         let n = new YearFormat(this.value_n_new);
         this.array_rent.push(rent);
         this.array_n.push(n);
@@ -149,7 +149,9 @@ export default {
       for (let i = 0; i < this.count_rents; i++) {
         total = new PositiveValute(total + this.array_rent[i]);
       }
-      assert (this.count_rents > 0, "Должна быть хотя бы одна рента");
+      if (this.count_rents === 0) {
+        throw new Error("Должна быть хотя бы одна рента");
+      }
       return total;
     }),
     total_n: correctCalcDecorator(function () {
