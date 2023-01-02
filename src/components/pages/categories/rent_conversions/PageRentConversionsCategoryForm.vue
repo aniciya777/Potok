@@ -141,7 +141,7 @@ export default {
   },
   computed: {
     count_rents() {
-      assert (this.array_rent.length === this.array_n.length, "Платежи и сроки рент должны быть одинаковой длины");
+      // assert (this.array_rent.length === this.array_n.length, "Платежи и сроки рент должны быть одинаковой длины");
       return this.array_rent.length;
     },
     total_r: correctCalcDecorator(function () {
