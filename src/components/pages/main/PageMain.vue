@@ -1,8 +1,5 @@
 <template>
   <div class="page">
-    <h1 class="page__title">
-      Главная
-    </h1>
     <div class="row">
       <div class="col-12 col-md-5 d-flex align-items-center">
         <p class="main-page__slogan">

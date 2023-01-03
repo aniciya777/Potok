@@ -110,3 +110,13 @@ h2 {
     text-align: center;
   }
 }
+
+.no-latex {
+  font-size: 1.21em;
+  font-style: italic;
+  white-space: nowrap;
+  text-rendering: auto;
+  font-family: KaTeX_Main, Times New Roman, serif;
+  line-height: 1.2;
+  text-indent: 0;
+}

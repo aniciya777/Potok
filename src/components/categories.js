@@ -2,6 +2,7 @@ import PageSimpleCategory from "@/components/pages/categories/simple/PageSimpleC
 import PageCompound from "@/components/pages/categories/compound/PageCompoundCategory.vue";
 import PageRentConversionsCategory
   from "@/components/pages/categories/rent_conversions/PageRentConversionsCategory.vue";
+import PageInvestmentsCategory from "@/components/pages/categories/investments/PageInvestmentsCategory.vue";
 
 export const categories = [
   {
@@ -31,7 +32,7 @@ export const categories = [
   {
     path: '/categories/investments',
     name: 'investments',
-    component: PageSimpleCategory,
+    component: PageInvestmentsCategory,
     meta: {
       breadcrumb: 'Оценивание инвестиций',
     },
