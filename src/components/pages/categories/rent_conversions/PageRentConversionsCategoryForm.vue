@@ -3,18 +3,8 @@
     <div class="form-calculator">
       <hr>
       <h3 class="text-center">
-        Расчет консолидации финансовых рент
+        Параметры старых рент
       </h3>
-      <CalculationInput
-        :value="value_i"
-        label="Процентная ставка у заменяющей ренты"
-        input_id="input-i"
-      />
-
-      <hr>
-      <h4 class="text-center">
-        Новая рента
-      </h4>
       <CalculationInput
         :value="value_rent_new"
         label="Годовые платежи по ренте"
@@ -42,7 +32,8 @@
                   class="btn btn-remove btn-primary"
                   @click="removeAllRents()"
                 >
-                  Удалить всё
+                  <span class="d-none d-lg-block">Удалить все</span>
+                  <i class="bi bi-eraser-fill d-block d-lg-none"></i>
                 </button>
               </th>
             </tr>
@@ -57,7 +48,8 @@
                   class="btn btn-remove btn-primary"
                   @click="removeRent(index)"
                 >
-                  Удалить
+                  <span class="d-none d-lg-block">Удалить</span>
+                  <i class="bi bi-x d-block d-lg-none"></i>
                 </button>
               </td>
             </tr>
@@ -71,6 +63,16 @@
           </i>
         </p>
       </div>
+
+      <hr>
+      <h3 class="text-center">
+        Параметры новой ренты
+      </h3>
+      <CalculationInput
+        :value="value_i"
+        label="Процентная ставка у заменяющей ренты"
+        input_id="input-i"
+      />
 
       <hr>
       <h3 class="text-center">
@@ -95,7 +97,6 @@
 import CalculationInput from "@/components/UI/CalculationInput.vue";
 import ResultInput from "@/components/UI/ResultInput.vue";
 import { PositivePercent, PositiveValute, PositiveFloat, YearFormat } from '@/types/types';
-// import * as assert from "assert";
 import {correctCalcDecorator} from "@/utils/correctCalcDecorator";
 
 export default {
@@ -141,7 +142,6 @@ export default {
   },
   computed: {
     count_rents() {
-      // assert (this.array_rent.length === this.array_n.length, "Платежи и сроки рент должны быть одинаковой длины");
       return this.array_rent.length;
     },
     total_r: correctCalcDecorator(function () {
@@ -173,6 +173,20 @@ export default {
     width: 100%;
     border-collapse: collapse;
     border: none;
+
+    @media (max-width: 992px) {
+      font-size: 0.8em;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.6em;
+
+      td, th {
+        padding: 5px;
+      }
+    }
+
+
     th, td {
       border: 1px solid white;
       padding: 10px;
@@ -189,7 +203,7 @@ export default {
     color: black;
     font-size: 1rem;
     border-radius: 10px;
-    padding: 0.2rem 20px;
+    padding: 0.2rem 10px;
 
     &:hover {
       border-color: white;

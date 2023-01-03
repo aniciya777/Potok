@@ -5,7 +5,8 @@
     </label>
     <div class="input-group position-relative">
       <input class="form-control" :id="id" @change="set_value($event)" @focusin="focus_value" :value="value">
-      <button class="form-control__clear-btn" @click="clear_value">X</button>
+      <button class="form-control__clear-btn bi bi-x-circle" @click="clear_value">
+      </button>
     </div>
   </div>
 </template>
@@ -49,5 +50,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.form-control__clear-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-weight: bold;
+  font-size: 80%;
+  line-height: 1rem;
+}
 </style>

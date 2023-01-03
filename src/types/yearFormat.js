@@ -77,7 +77,7 @@ class YearFormat extends BaseCalculationType {
   setValue(val) {
     super.setValue(val);
     if (this.error === null) {
-      this.value = parseFloat(this.value.toPrecision(12));
+      this.value = parseFloat(this.value.toPrecision(5));
     }
   }
 }
