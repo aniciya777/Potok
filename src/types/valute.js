@@ -14,9 +14,14 @@ class Valute extends BaseCalculationType {
     if (this.error) {
       return this.error;
     }
-    const int = Intl.NumberFormat('ru-RU').format(Math.floor(this.value / 100));
-    const dec = String(this.value % 100).padStart(2, '0');
-    return `${int} руб. ${dec} коп.`;
+    const val = Math.abs(this.value);
+    const int = Intl.NumberFormat('ru-RU').format(Math.floor(val / 100));
+    const dec = String(val % 100).padStart(2, '0');
+    let result = `${int} руб. ${dec} коп.`;
+    if (this.value < 0 && !this.constructor.onlyPositive()) {
+      result = `-${result}`;
+    }
+    return result;
   }
 }
 

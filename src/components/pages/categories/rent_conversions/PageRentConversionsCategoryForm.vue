@@ -8,12 +8,10 @@
       <CalculationInput
         :value="value_rent_new"
         label="Годовые платежи по ренте"
-        input_id="value_rent_new"
       />
       <CalculationInput
         :value="value_n_new"
         label="Срок ренты, лет"
-        input_id="value_n_new"
       />
       <div class="mb-3">
         <button class="btn btn-primary w-100" @click="addNewRent()">
@@ -71,7 +69,6 @@
       <CalculationInput
         :value="value_i"
         label="Процентная ставка у заменяющей ренты"
-        input_id="input-i"
       />
 
       <hr>
@@ -169,44 +166,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .table_rents {
-    width: 100%;
-    border-collapse: collapse;
-    border: none;
 
-    @media (max-width: 992px) {
-      font-size: 0.8em;
-    }
-
-    @media (max-width: 768px) {
-      font-size: 0.6em;
-
-      td, th {
-        padding: 5px;
-      }
-    }
-
-
-    th, td {
-      border: 1px solid white;
-      padding: 10px;
-
-      &:has(button.btn-remove) {
-        text-align: center;
-        border: none;
-      }
-    }
-  }
-
-  .btn-primary {
-    background-color: white;
-    color: black;
-    font-size: 1rem;
-    border-radius: 10px;
-    padding: 0.2rem 10px;
-
-    &:hover {
-      border-color: white;
-    }
-  }
 </style>

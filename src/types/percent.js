@@ -11,7 +11,7 @@ class Percent extends BaseCalculationType {
   }
 
   setValue(value) {
-    super.setValue(Math.round(value * 100));
+    super.setValue(Math.round(value * 100 * 100) / 100);
   }
 
   valueOf() {
