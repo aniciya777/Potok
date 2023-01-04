@@ -93,16 +93,6 @@
         :value="value_irr"
         label="Внутренняя норма доходности"
       />
-      <div class="mb-3">
-        <button class="btn btn-primary w-100" @click="toggleCalculationIRR()">
-          <span v-if="is_calculate_irr">
-            Расчёт ...
-          </span>
-          <span v-else>
-            Рассчитать
-          </span>
-        </button>
-      </div>
 
     </div>
   </div>
@@ -133,11 +123,9 @@ export default {
       ],
       value_p_new: new Valute(100_000),
       value_i: new PositivePercent(0.1),
-      value_i_temp: new PositivePercent(0.1),
       step_irr: new PositivePercent(0.0001),
       max_irr: new PositivePercent(2),
-      is_calculate_irr: false,
-      value_irr: new PositivePercent(NaN).error='Расчёт не выполнен',
+      value_irr: new PositivePercent(NaN),
     };
   },
   methods: {
@@ -154,16 +142,27 @@ export default {
     removeAllP() {
       this.value_array_p = [];
     },
-    toggleCalculationIRR() {
-      if (this.is_calculate_irr) {
-        this.is_calculate_irr = false;
-      } else {
-        this.is_calculate_irr = true;
-        this.value_i_temp = new PositivePercent(this.value_i);
-        this.value_i = new PositivePercent(0);
-        this.AsyncCalculateIRR();
+    calcPV: correctCalcDecorator(function (power) {
+      let pv = new PositiveValute(0);
+      for (let i = 0; i < this.value_n; i++) {
+        if (this.value_array_p[i] > 0) {
+          pv = new PositiveValute(pv + this.value_array_p[i] / (1 + power) ** (i + 1));
+        }
       }
-    },
+      return pv;
+    }),
+    calcIC: correctCalcDecorator(function (power) {
+      let ic = new PositiveValute(0);
+      for (let i = 0; i < this.value_n; i++) {
+        if (this.value_array_p[i] < 0) {
+          ic = new PositiveValute(ic + -this.value_array_p[i] / (1 + power) ** (i + 1));
+        }
+      }
+      return ic;
+    }),
+    calcNPV: correctCalcDecorator(function (power) {
+      return new Valute(this.calcPV(power) - this.calcIC(power));
+    }),
     AsyncCalculateIRR() {
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -171,44 +170,39 @@ export default {
             if (this.value_ic.value === 0) {
               this.value_irr = new PositivePercent(NaN);
               this.value_irr.error='Инвестиции не заданы';
-              this.value_i = new PositivePercent(this.value_i_temp);
-              this.is_calculate_irr = false;
               resolve();
             } else {
+              this.value_irr = new PositivePercent(0);
               this.calculateIRR();
               resolve();
             }
           } catch (e) {
             this.value_irr = new PositivePercent(NaN);
             this.value_irr.error=e.message;
-            this.value_i = new PositivePercent(this.value_i_temp);
-            this.is_calculate_irr = false;
             resolve();
           }
         }, 0);
       });
     },
     calculateIRR() {
-      while (this.is_calculate_irr) {
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        if (this.value_irr.value > this.max_irr.value) {
+          throw new Error('Не удалось найти внутреннюю норму доходности');
+        }
         try {
-          if (this.value_i.value > this.max_irr.value) {
-            throw new Error('Превышен максимальный порог расчёта');
-          }
-          if (this.value_npv <= 0) {
-            if (this.value_i >= this.step_irr) {
-              this.value_i = new PositivePercent(this.value_i - this.step_irr);
+          if (this.calcNPV(this.value_irr) <= 0) {
+            if (this.value_irr >= this.step_irr) {
+              this.value_irr = new PositivePercent(this.value_irr - this.step_irr);
             }
-            this.value_irr = new PositivePercent(this.value_i);
-            this.value_i = new PositivePercent(this.value_i_temp);
-            this.is_calculate_irr = false;
+            break;
           } else {
-            this.value_i = new PositivePercent(this.value_i + this.step_irr);
+            this.value_irr = new PositivePercent(this.value_irr + this.step_irr);
           }
         } catch (e) {
           this.value_irr = new PositiveFloat(NaN);
           this.value_irr.error = "Не удалось найти IRR";
-          this.value_i = new PositivePercent(this.value_i_temp);
-          this.is_calculate_irr = false;
+          break;
         }
       }
     },
@@ -217,26 +211,15 @@ export default {
     value_n() {
       return this.value_array_p.length;
     },
-    value_pv: correctCalcDecorator(function () {
-      let pv = new PositiveValute(0);
-      for (let i = 0; i < this.value_n; i++) {
-        if (this.value_array_p[i] > 0) {
-          pv = new PositiveValute(pv + this.value_array_p[i] / (1 + this.value_i) ** (i + 1));
-        }
-      }
-      return pv;
-    }),
-    value_ic: correctCalcDecorator(function () {
-      let ic = new PositiveValute(0);
-      for (let i = 0; i < this.value_n; i++) {
-        if (this.value_array_p[i] < 0) {
-          ic = new PositiveValute(ic + -this.value_array_p[i] / (1 + this.value_i) ** (i + 1));
-        }
-      }
-      return ic;
-    }),
+    value_pv() {
+      return this.calcPV(this.value_i);
+    },
+    value_ic() {
+      return this.calcIC(this.value_i);
+    },
     value_npv: correctCalcDecorator(function () {
-      return new Valute(this.value_pv - this.value_ic);
+      this.AsyncCalculateIRR();
+      return this.calcNPV(this.value_i);
     }),
     value_pi: correctCalcDecorator(function () {
       return new PositiveFloat(this.value_pv / this.value_ic);
