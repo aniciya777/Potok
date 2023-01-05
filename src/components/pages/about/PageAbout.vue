@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="row banda">
+    <div v-if="'ъыъ' in this.$route.query" class="row banda">
       <div class="col-12 col-md-6 employee-card">
         <img src="@/assets/images/band1.jpg" alt="банда 1" class="w-100">
       </div>

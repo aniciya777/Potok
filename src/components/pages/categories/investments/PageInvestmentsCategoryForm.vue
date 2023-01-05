@@ -170,11 +170,13 @@ export default {
           try {
             if (this.value_ic.value === 0) {
               reject(new Error("Инвестиции не заданы"));
-            } else {
-              this.value_irr = new PositivePercent(0);
-              this.calculateIRR();
-              resolve();
             }
+            this.value_irr = new PositivePercent(0);
+            if (this.calcNPV(this.value_irr) < 0) {
+              reject(new Error("Инвестиции не окупаются"));
+            }
+            this.calculateIRR();
+            resolve();
           } catch (e) {
             reject(e);
           }
