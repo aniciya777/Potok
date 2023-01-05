@@ -427,10 +427,7 @@
           <vue-latex :expression="'(i_1, i_2)'" :fontsize="latex_fontsize"/>
           функция
           <vue-latex :expression="'f(i) = A - R a_{n;i}'" :fontsize="latex_fontsize"/>
-          меняла свое значение с
-          <vue-latex :expression="latex_quotes + '+' + latex_quotes" :fontsize="latex_fontsize"/>
-          на
-          <vue-latex :expression="latex_quotes + '-' + latex_quotes" :fontsize="latex_fontsize"/>.
+          меняла свое значение с "+" на "-".
           Далее применяют формулу
           <i>линейной интерполяции</i>.
         </p>
@@ -465,10 +462,7 @@
           <vue-latex :expression="'i_2'" :fontsize="latex_fontsize"/>
           - ближайшие друг к другу значения величины процентной ставки, удовлетворяющие условиям изменения знака функции
           <vue-latex :expression="'f(i)'" :fontsize="latex_fontsize"/>
-          с
-          <vue-latex :expression="latex_quotes + '+' + latex_quotes" :fontsize="latex_fontsize"/>
-          на
-          <vue-latex :expression="latex_quotes + '-' + latex_quotes" :fontsize="latex_fontsize"/>.
+          с "+" на "-".
         </p>
         <PageRentsCategoryForm/>
       </div>

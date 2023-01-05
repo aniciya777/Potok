@@ -32,21 +32,21 @@ export class BaseCalculationType {
   }
 
   checkValue(value) {
-    if (value === null || value === undefined || isNaN(value)) {
+    try {
+      if (value === null || value === undefined || isNaN(value)) {
+        throw new Error('Некорректный результат');
+      } else if (value === Infinity || value === -Infinity) {
+        throw new Error('Значение слишком большое');
+      } else if (this.constructor.onlyPositive() && value < 0) {
+        throw new Error('Значение не может быть отрицательным');
+      }
+      this.value = value;
+      return true;
+    } catch (e) {
       this.value = NaN;
-      this.error = 'Некорректный результат';
-      return false;
-    } else if (value === Infinity || value === -Infinity) {
-      this.value = NaN;
-      this.error = 'Значение слишком большое';
-      return false;
-    } else if (this.constructor.onlyPositive() && value < 0) {
-      this.value = NaN;
-      this.error = 'Значение не может быть отрицательным';
+      this.error = e.message;
       return false;
     }
-    this.value = value;
-    return true;
   }
 
   setValue(val) {
