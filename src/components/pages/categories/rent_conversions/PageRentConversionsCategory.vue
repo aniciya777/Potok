@@ -12,7 +12,7 @@
         </p>
         <p class="text-center">
           <vue-latex
-            :expression="'R * \\frac{1 - (1 + i)^{-n}}{i} = \\frac{\\sum{R_q * (1 - (1 + i)^{-n_q})}}{i}'"
+            :expression="'R \\frac{1 - (1 + i)^{-n}}{i} = \\frac{\\sum{R_q (1 - (1 + i)^{-n_q})}}{i}'"
             display-mode :fontsize="latex_fontsize"/>
         </p>
         <p>
@@ -37,7 +37,7 @@
         </p>
         <p class="text-center">
           <vue-latex
-            :expression="'n = \\frac{\\ln{R} - \\ln{\\sum{R_q * (1 + i)^{-n_q}}}}{\\ln{(1 + i)}}'"
+            :expression="'n = \\frac{\\ln{R} - \\ln{\\sum{R_q (1 + i)^{-n_q}}}}{\\ln{(1 + i)}}'"
             display-mode :fontsize="latex_fontsize"/>
         </p>
       </div>

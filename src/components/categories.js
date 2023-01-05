@@ -3,6 +3,7 @@ import PageCompound from "@/components/pages/categories/compound/PageCompoundCat
 import PageRentConversionsCategory
   from "@/components/pages/categories/rent_conversions/PageRentConversionsCategory.vue";
 import PageInvestmentsCategory from "@/components/pages/categories/investments/PageInvestmentsCategory.vue";
+import PageRentsCategory from "@/components/pages/categories/rents/PageRentsCategory.vue";
 
 export const categories = [
   {
@@ -38,19 +39,11 @@ export const categories = [
     },
   },
   {
-    path: '/categories/permanentstreams',
-    name: 'permanentstreams',
-    component: PageSimpleCategory,
+    path: '/categories/rents',
+    name: 'rents',
+    component: PageRentsCategory,
     meta: {
-      breadcrumb: 'Постоянные потоки',
+      breadcrumb: 'Расчёт параметров рент',
     },
-  },
-  {
-    path: '/categories/specialstreams',
-    name: 'specialstreams',
-    component: PageSimpleCategory,
-    meta: {
-      breadcrumb: 'Специальные потоки',
-    },
-  },
+  }
 ];

@@ -32,14 +32,14 @@
           Если срок измеряется в годах (как это обычно и бывает), то
           <vue-latex :expression="'i'" :fontsize="latex_fontsize" strict="ignore"/>
           означает годовую процентную ставку, Соответственно каждый год приносит проценты в сумме
-          <vue-latex :expression="'P * i'" :fontsize="latex_fontsize" strict="ignore"/>.
+          <vue-latex :expression="'P i'" :fontsize="latex_fontsize" strict="ignore"/>.
         </p>
         <p>
           Начисленные за весь срок проценты составят:
         </p>
         <p class="text-center">
           <vue-latex
-            :expression="'I = P * n * i'"
+            :expression="'I = P n i'"
             display-mode :fontsize="latex_fontsize"/>
         </p>
         <p>
@@ -48,7 +48,7 @@
         <p class="text-center">
           <i></i>
           <vue-latex
-            :expression="'I = S = P + I = P + P*n*i = P*(1 + n*i)'"
+            :expression="'I = S = P + I = P + P n i = P (1 + n i)'"
             display-mode :fontsize="latex_fontsize"/>
         </p>
       </div>

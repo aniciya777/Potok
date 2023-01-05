@@ -15,16 +15,16 @@
         <br>
         <p>
           В конце первого года проценты равны величине
-          <vue-latex :expression="'P * i'" :fontsize="latex_fontsize"/>
+          <vue-latex :expression="'P i'" :fontsize="latex_fontsize"/>
           , а наращенная сумма составит
-          <vue-latex :expression="'P + P * i = P * (1 + i)'" :fontsize="latex_fontsize"/>
+          <vue-latex :expression="'P + P i = P (1 + i)'" :fontsize="latex_fontsize"/>
           . К концу второго года она достигнет величины
-          <vue-latex :expression="'P * (1 + i) + P * (1 + i) * i= P * (1 + i) ^ 2'" :fontsize="latex_fontsize"/>
+          <vue-latex :expression="'P (1 + i) + P (1 + i) i= P (1 + i) ^ 2'" :fontsize="latex_fontsize"/>
           и т.д. В конце <vue-latex :expression="'n'" :fontsize="latex_fontsize"/>-го года наращенная сумма будет равна
         </p>
         <p class="text-center">
           <vue-latex
-            :expression="'S = P * (1 + i) ^ n'"
+            :expression="'S = P (1 + i) ^ n'"
             display-mode :fontsize="latex_fontsize"/>
         </p>
         <p>
@@ -32,7 +32,7 @@
         </p>
         <p class="text-center">
           <vue-latex
-            :expression="'I = S - P = P * ((1 + i) ^ n - 1)'"
+            :expression="'I = S - P = P ((1 + i) ^ n - 1)'"
             display-mode :fontsize="latex_fontsize"/>
         </p>
         <p>
@@ -40,7 +40,7 @@
         </p>
         <p class="text-center">
           <vue-latex
-            :expression="'I_p = P * ((1 + i) ^ n - (1 + n * i))'"
+            :expression="'I_p = P ((1 + i) ^ n - (1 + n i))'"
             display-mode :fontsize="latex_fontsize"/>
         </p>
         <p>
