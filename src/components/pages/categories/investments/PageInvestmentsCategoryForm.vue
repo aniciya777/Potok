@@ -90,7 +90,7 @@
         :value="value_dpp_years"
       />
       <ResultInput
-        :value="value_irr"
+        :value="value_irr_calculated"
         label="Внутренняя норма доходности"
       />
 
@@ -126,6 +126,7 @@ export default {
       step_irr: new PositivePercent(0.0001),
       max_irr: new PositivePercent(2),
       value_irr: new PositivePercent(NaN),
+      value_irr_calculated: new PositivePercent(NaN),
     };
   },
   methods: {
@@ -164,22 +165,18 @@ export default {
       return new Valute(this.calcPV(power) - this.calcIC(power));
     }),
     AsyncCalculateIRR() {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         setTimeout(() => {
           try {
             if (this.value_ic.value === 0) {
-              this.value_irr = new PositivePercent(NaN);
-              this.value_irr.error='Инвестиции не заданы';
-              resolve();
+              reject(new Error("Инвестиции не заданы"));
             } else {
               this.value_irr = new PositivePercent(0);
               this.calculateIRR();
               resolve();
             }
           } catch (e) {
-            this.value_irr = new PositivePercent(NaN);
-            this.value_irr.error=e.message;
-            resolve();
+            reject(e);
           }
         }, 0);
       });
@@ -190,21 +187,31 @@ export default {
         if (this.value_irr.value > this.max_irr.value) {
           throw new Error('Не удалось найти внутреннюю норму доходности');
         }
-        try {
-          if (this.calcNPV(this.value_irr) <= 0) {
-            if (this.value_irr >= this.step_irr) {
-              this.value_irr = new PositivePercent(this.value_irr - this.step_irr);
-            }
-            break;
-          } else {
-            this.value_irr = new PositivePercent(this.value_irr + this.step_irr);
+        if (this.calcNPV(this.value_irr) <= 0) {
+          if (this.value_irr >= this.step_irr) {
+            this.value_irr = new PositivePercent(this.value_irr - this.step_irr);
           }
-        } catch (e) {
-          this.value_irr = new PositiveFloat(NaN);
-          this.value_irr.error = "Не удалось найти IRR";
           break;
         }
+        this.value_irr = new PositivePercent(this.value_irr + this.step_irr);
       }
+    },
+  },
+  watch: {
+    value_array_p: {
+      handler: function () {
+        this.value_irr_calculated = new PositivePercent(NaN);
+        this.value_irr_calculated.error = '...';
+        this.AsyncCalculateIRR()
+          .then(() => {
+            this.value_irr_calculated = new PositivePercent(this.value_irr);
+          })
+          .catch((e) => {
+            this.value_irr_calculated.error = e.message;
+          });
+      },
+      deep: true,
+      immediate: true,
     },
   },
   computed: {
@@ -218,7 +225,6 @@ export default {
       return this.calcIC(this.value_i);
     },
     value_npv: correctCalcDecorator(function () {
-      this.AsyncCalculateIRR();
       return this.calcNPV(this.value_i);
     }),
     value_pi: correctCalcDecorator(function () {
