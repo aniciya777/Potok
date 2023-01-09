@@ -29,10 +29,7 @@ export default {
   methods: {
     set_value(event) {
       let obj = this.value.constructor.fromInput(event.target);
-      // eslint-disable-next-line vue/no-mutating-props
-      this.value.value = obj.value;
-      // eslint-disable-next-line vue/no-mutating-props
-      this.value.error = obj.error;
+      this.value.load(obj);
     },
     focus_value() {
       this.value.resetError()

@@ -15,7 +15,7 @@
       />
       <CalculationInput
         :value="value_n"
-        label="Срок ссуды, лет"
+        label="Срок ссуды"
       />
 
       <hr>
@@ -45,7 +45,7 @@
 <script>
 import CalculationInput from "@/components/UI/CalculationInput.vue";
 import ResultInput from "@/components/UI/ResultInput.vue";
-import { PositiveValute, PositivePercent, PositiveFloat } from '@/types/types';
+import { PositiveValute, PositivePercent, PositiveFloat, YearFormat } from '@/types/types';
 import {correctCalcDecorator} from "@/utils/correctCalcDecorator";
 
 export default {
@@ -58,7 +58,7 @@ export default {
     return {
       value_p: new PositiveValute(100000),
       value_i: new PositivePercent(0.1),
-      value_n: new PositiveFloat(5),
+      value_n: new YearFormat(5),
     }
   },
   computed: {

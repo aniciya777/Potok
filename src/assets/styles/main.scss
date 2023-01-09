@@ -66,6 +66,12 @@ h2 {
     width: 100%;
     box-sizing: border-box;
     padding-left: 20px;
+
+    &.form-check-input {
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+    }
   }
 }
 

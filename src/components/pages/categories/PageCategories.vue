@@ -50,9 +50,13 @@ export default {
     color: #000000;
     background: #FFFFFF;
     border-radius: 25px;
-    display: block;
     margin: 20px 34px;
     padding: 18px 34px;
+    height: calc(100% - 36px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   p.text-footer {

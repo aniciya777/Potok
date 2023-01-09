@@ -106,7 +106,7 @@ export default {
     return {
       value_i: new PositivePercent(0.05),
       value_rent_new: new PositiveValute(1000),
-      value_n_new: new PositiveFloat(10),
+      value_n_new: new YearFormat(10),
       array_rent: [
         new PositiveValute(500),
         new PositiveValute(1500),

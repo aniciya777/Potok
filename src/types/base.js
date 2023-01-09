@@ -27,6 +27,18 @@ export class BaseCalculationType {
     this.setValue(val);
   }
 
+  copy() {
+    return new this.constructor(this.value);
+  }
+
+  load(obj) {
+    if (!(obj instanceof this.constructor)) {
+      obj = new this.constructor(obj);
+    }
+    this.value = obj.value;
+    this.error = obj.error;
+  }
+
   static onlyPositive() {
     return false;
   }

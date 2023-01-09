@@ -4,6 +4,7 @@ import PageRentConversionsCategory
   from "@/components/pages/categories/rent_conversions/PageRentConversionsCategory.vue";
 import PageInvestmentsCategory from "@/components/pages/categories/investments/PageInvestmentsCategory.vue";
 import PageRentsCategory from "@/components/pages/categories/rents/PageRentsCategory.vue";
+import PageInterestRateCategory from "@/components/pages/categories/interest_rate/PageInterestRateCategory.vue";
 
 export const categories = [
   {
@@ -44,6 +45,14 @@ export const categories = [
     component: PageRentsCategory,
     meta: {
       breadcrumb: 'Расчёт параметров рент',
+    },
+  },
+  {
+    path: '/categories/interestrate',
+    name: 'interestrate',
+    component: PageInterestRateCategory,
+    meta: {
+      breadcrumb: 'Определение размера процентной ставки',
     },
   }
 ];
