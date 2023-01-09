@@ -18,7 +18,8 @@
         label="Срок ренты, лет"
       />
       <div class="mb-3">
-        <select v-model="value_rent.type">
+        <label for="rent_types" class="form-label">Момент выплат платежей</label>
+        <select id="rent_types" class="overflow-hidden" v-model="value_rent.type" :size="Object.keys(rent_types).length">
           <option v-for="option in Object.keys(rent_types)" :key="option" v-bind:value="option">
             {{ rent_types[option] }}
           </option>

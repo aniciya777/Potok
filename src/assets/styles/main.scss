@@ -58,7 +58,15 @@ h2 {
   margin-top: 30px;
   font-size: 40px;
 
-  input {
+  select {
+    padding-left: 0 !important;
+
+    option {
+      padding: 0 20px;
+    }
+  }
+
+  input, select {
     background: #FFFFFF;
     border-radius: 10px;
     font-size: inherit;
