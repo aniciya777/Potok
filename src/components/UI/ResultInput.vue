@@ -3,7 +3,7 @@
     <label v-if="label" :for="id" class="form-label">
       {{ label }}
     </label>
-    <input type="text" class="form-control" :id="id" :value="value" readonly>
+    <input type="text" :class="inputClasses" :id="id" :value="value" readonly>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   name: "ResultInput",
   props: {
     value: {
-      type: BaseCalculationType,
+      type: [BaseCalculationType, String],
       required: true,
     },
     label: {
@@ -25,6 +25,12 @@ export default {
   computed: {
     id() {
       return `result-input-${this.componentID}`;
+    },
+    inputClasses() {
+      return {
+        "form-control": true,
+        "input_is-invalid": this.value instanceof String || this.value.error !== null,
+      };
     },
   },
 }

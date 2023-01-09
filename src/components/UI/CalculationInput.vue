@@ -4,7 +4,7 @@
       {{ label }}
     </label>
     <div class="input-group position-relative">
-      <input class="form-control" :id="id" @change="set_value($event)" @focusin="focus_value" :value="value">
+      <input :class="inputClasses" :id="id" @change="set_value($event)" @focusin="focus_value" :value="value">
       <button class="form-control__clear-btn bi bi-x-circle" @click="clear_value">
       </button>
     </div>
@@ -41,6 +41,12 @@ export default {
   computed: {
     id() {
       return `calculation-input-${this.componentID}`;
+    },
+    inputClasses() {
+      return {
+        "form-control": true,
+        "input_is-invalid": this.value instanceof String || this.value.error !== null,
+      };
     },
   }
 }

@@ -25,7 +25,6 @@
           </option>
         </select>
       </div>
-
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="has_m" v-model="value_rent.has_m">
         <label for="has_m" class="form-check-label">Начисление процентов несколько раз в году</label>
@@ -45,30 +44,27 @@
         label="Количество выплат рент в год"
       />
 
-
-
       <hr>
       <h3 class="text-center">
         Результаты расчета
       </h3>
       <ResultInput
-        :value="value_rent.accruedRent"
+        :value="accruedRent"
         label="Наращенная сумма к концу срока"
       />
       <ResultInput
-        :value="value_rent.rentAccumulationFactor"
+        :value="rentAccumulationFactor"
         label="Коэффициент наращения ренты"
       />
       <hr>
       <ResultInput
-        :value="value_rent.presentValueOfPermanentRent"
+        :value="presentValueOfPermanentRent"
         label="Современная стоимость постоянной ренты"
       />
       <ResultInput
-        :value="value_rent.rentReductionFactor"
+        :value="rentReductionFactor"
         label="Коэффициент приведения ренты"
       />
-
 
     </div>
   </div>
@@ -78,8 +74,7 @@
 import CalculationInput from "@/components/UI/CalculationInput.vue";
 import ResultInput from "@/components/UI/ResultInput.vue";
 import {Rent} from "@/classes/rent";
-// import { PositivePercent, PositiveValute, PositiveFloat, NaturalNumber } from '@/types/types';
-// eslint-disable-next-line no-unused-vars
+import { PositiveValute, PositiveFloat } from '@/types/types';
 import {correctCalcDecorator} from "@/utils/correctCalcDecorator";
 
 export default {
@@ -101,6 +96,20 @@ export default {
     this.value_rent.duration.setValue(10);
     this.value_rent.m.setValue(12);
     this.value_rent.p.setValue(2);
+  },
+  computed: {
+    accruedRent: correctCalcDecorator(function () {
+      return new PositiveValute(this.value_rent.accruedRent);
+    }),
+    rentAccumulationFactor: correctCalcDecorator(function () {
+      return new PositiveFloat(this.value_rent.rentAccumulationFactor);
+    }),
+    presentValueOfPermanentRent: correctCalcDecorator(function () {
+      return new PositiveValute(this.value_rent.presentValueOfPermanentRent);
+    }),
+    rentReductionFactor: correctCalcDecorator(function () {
+      return new PositiveFloat(this.value_rent.rentReductionFactor);
+    }),
   },
 }
 </script>
