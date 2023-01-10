@@ -24,6 +24,7 @@ export class BaseCalculationType {
   constructor(val) {
     this.error = null;
     this.value = NaN;
+    this.wait = false;
     this.setValue(val);
   }
 

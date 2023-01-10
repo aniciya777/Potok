@@ -81,7 +81,6 @@ export default {
   name: "PageRentConversionsCategoryForm",
   components: {
     CalculationInput,
-    // eslint-disable-next-line vue/no-unused-components
     ResultInput,
   },
   data() {

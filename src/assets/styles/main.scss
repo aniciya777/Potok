@@ -84,6 +84,12 @@ h2 {
     &.input_is-invalid {
       background: #ff8080;
     }
+
+    &[type="radio"] {
+      width: 20px;
+      height: 20px;
+      margin: 0 10px 0 0;
+    }
   }
 }
 

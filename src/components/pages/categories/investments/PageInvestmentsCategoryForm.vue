@@ -204,12 +204,16 @@ export default {
       handler: function () {
         this.value_irr_calculated = new PositivePercent(NaN);
         this.value_irr_calculated.error = '...';
+        this.value_irr_calculated.wait = true;
         this.AsyncCalculateIRR()
           .then(() => {
             this.value_irr_calculated = new PositivePercent(this.value_irr);
           })
           .catch((e) => {
             this.value_irr_calculated.error = e.message;
+          })
+          .finally(() => {
+            this.value_irr_calculated.wait = false;
           });
       },
       deep: true,

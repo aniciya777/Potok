@@ -29,7 +29,8 @@ export default {
     inputClasses() {
       return {
         "form-control": true,
-        "input_is-invalid": this.value instanceof String || this.value.error !== null,
+        "input_is-invalid": this.value instanceof String && this.value !== '...' || this.value.error !== null && !this.value.wait,
+        "input_waiting": this.value instanceof String && this.value === '...' || this.value.wait,
       };
     },
   },
