@@ -71,8 +71,6 @@
         :value="interestRate"
         label="Процентная ставка"
       />
-
-
     </div>
   </div>
 </template>
@@ -82,6 +80,7 @@ import CalculationInput from "@/components/UI/CalculationInput.vue";
 import ResultInput from "@/components/UI/ResultInput.vue";
 import {PositivePercent, PositiveValute, Valute} from '@/types/types';
 import {Rent} from "@/classes/rent";
+import {correctCalcDecorator} from "@/utils/correctCalcDecorator";
 
 export default {
   name: "PageInterestRateCategoryForm",
@@ -97,7 +96,7 @@ export default {
       rent_types: Rent.types,
       calc_parameter: 'value_accruedRent',
       interestRate: new PositivePercent(NaN),
-      step_interestRate: new PositivePercent(0.0001),
+      step_interestRate_default: new PositivePercent(0.0001),
       max_interestRate: new PositivePercent(2),
     };
   },
@@ -112,17 +111,20 @@ export default {
   },
   methods: {
     calculateInterestRate() {
+      let old_errorFunctionality = undefined;
       // eslint-disable-next-line no-constant-condition
       while (true) {
         if (this.value_rent.interestRate > this.max_interestRate) {
           throw new Error('Не удалось найти процентную ставку');
         }
         if (this.errorFunctionality <= 0) {
-          // if (this.value_rent.interestRate.value >= this.step_interestRate) {
-          //   this.value_rent.interestRate.load(new PositivePercent(this.value_rent.interestRate - this.step_interestRate));
-          // }
+          if (old_errorFunctionality !== undefined) {
+            this.value_rent.interestRate.load(new PositivePercent(this.value_rent.interestRate
+              + this.step_interestRate * this.errorFunctionality / (old_errorFunctionality - this.errorFunctionality)));
+          }
           break;
         }
+        old_errorFunctionality = new Valute(+this.errorFunctionality);
         this.value_rent.interestRate.load(new PositivePercent(this.value_rent.interestRate + this.step_interestRate));
       }
     },
@@ -137,10 +139,11 @@ export default {
               return reject(new Error("Срок ренты не задан"));
             }
             this.value_rent.interestRate = new PositivePercent(+this.step_interestRate);
+            console.log('this.value_rent.interestRate', this.value_rent.interestRate, this.errorFunctionality);
             if (this.errorFunctionality < 0) {
-              if (this.calc_parameter === 'value_accruedRent') {
+              if (this.calc_parameter.toString() === 'value_accruedRent') {
                 return reject(new Error("Слишком низкая наращенная сумма к концу срока"));
-              } else if (this.calc_parameter === 'value_presentValueOfPermanentRent') {
+              } else if (this.calc_parameter.toString() === 'value_presentValueOfPermanentRent') {
                 return reject(new Error("Слишком высокая современная стоимость постоянной ренты"));
               } else {
                 return reject(new Error("Некорректный результат"));
@@ -178,60 +181,60 @@ export default {
         this.watchHandler();
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
     value_presentValueOfPermanentRent: {
       handler: function () {
         this.watchHandler();
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
     'value_rent.payment': {
       handler: function () {
         this.watchHandler();
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
     'value_rent.duration': {
       handler: function () {
         this.watchHandler();
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
     'value_rent.type': {
       handler: function () {
         this.watchHandler();
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
     'value_rent.numberOfPaymentsPerYear': {
       handler: function () {
         this.watchHandler();
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
     'value_rent.numberOfInterestPerYear': {
       handler: function () {
         this.watchHandler();
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
     calc_parameter: {
       handler: function () {
         this.watchHandler();
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
   },
   computed: {
-    errorFunctionality() {
+    errorFunctionality: correctCalcDecorator(function () {
       if (this.calc_parameter.toString() === 'value_accruedRent') {
         return new Valute(this.value_accruedRent - this.value_rent.accruedRent);
       } else if (this.calc_parameter.toString() === 'value_presentValueOfPermanentRent') {
@@ -239,7 +242,10 @@ export default {
       } else {
         throw new Error("Неизвестный параметр");
       }
-    },
+    }),
+    step_interestRate: correctCalcDecorator(function () {
+      return new PositivePercent(this.step_interestRate_default * this.value_rent.numberOfInterestPerYear);
+    }),
   },
 }
 </script>

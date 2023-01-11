@@ -82,7 +82,11 @@ h2 {
     }
 
     &.input_is-invalid {
-      background: #ff8080;
+      background: #ff8080 !important;
+    }
+
+    &.input_waiting {
+      background: #cccccc;
     }
 
     &[type="radio"] {
