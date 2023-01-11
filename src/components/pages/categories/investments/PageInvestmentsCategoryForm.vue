@@ -169,16 +169,16 @@ export default {
         setTimeout(() => {
           try {
             if (this.value_ic.value === 0) {
-              reject(new Error("Инвестиции не заданы"));
+              return reject(new Error("Инвестиции не заданы"));
             }
             this.value_irr = new PositivePercent(0);
             if (this.calcNPV(this.value_irr) < 0) {
-              reject(new Error("Инвестиции не окупаются"));
+              return reject(new Error("Инвестиции не окупаются"));
             }
             this.calculateIRR();
-            resolve();
+            return resolve();
           } catch (e) {
-            reject(e);
+            return reject(e);
           }
         }, 0);
       });
@@ -206,15 +206,17 @@ export default {
         this.value_irr_calculated.error = '...';
         this.value_irr_calculated.wait = true;
         this.AsyncCalculateIRR()
-          .then(() => {
-            this.value_irr_calculated = new PositivePercent(this.value_irr);
-          })
-          .catch((e) => {
-            this.value_irr_calculated.error = e.message;
-          })
           .finally(() => {
             this.value_irr_calculated.wait = false;
-          });
+          })
+          .then(
+            () => {
+              this.value_irr_calculated = new PositivePercent(this.value_irr);
+            },
+            (e) => {
+              this.value_irr_calculated.error = e.message;
+            }
+          );
       },
       deep: true,
       immediate: true,

@@ -92,7 +92,7 @@ export default {
   data: function () {
     return {
       value_accruedRent: new PositiveValute(20_000_000),
-      value_presentValueOfPermanentRent: new PositiveValute(20_000_000),
+      value_presentValueOfPermanentRent: new PositiveValute(6_000_000),
       value_rent: new Rent(),
       rent_types: Rent.types,
       calc_parameter: 'value_accruedRent',
@@ -130,26 +130,26 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           try {
-            if (this.value_rent.payment == 0) {
-              reject(new Error("Платежи не заданы"));
+            if (+this.value_rent.payment === 0) {
+              return reject(new Error("Платежи не заданы"));
             }
-            if (this.value_rent.duration == 0) {
-              reject(new Error("Срок ренты не задан"));
+            if (+this.value_rent.duration === 0) {
+              return reject(new Error("Срок ренты не задан"));
             }
             this.value_rent.interestRate = new PositivePercent(+this.step_interestRate);
             if (this.errorFunctionality < 0) {
               if (this.calc_parameter === 'value_accruedRent') {
-                reject(new Error("Слишком низкая наращенная сумма к концу срока"));
+                return reject(new Error("Слишком низкая наращенная сумма к концу срока"));
               } else if (this.calc_parameter === 'value_presentValueOfPermanentRent') {
-                reject(new Error("Слишком низкая современная стоимость постоянной ренты"));
+                return reject(new Error("Слишком высокая современная стоимость постоянной ренты"));
               } else {
-                reject(new Error("Некорректный результат"));
+                return reject(new Error("Некорректный результат"));
               }
             }
             this.calculateInterestRate();
-            resolve();
+            return resolve();
           } catch (e) {
-            reject(e);
+            return reject(e);
           }
         }, 0);
       });
@@ -159,15 +159,17 @@ export default {
       this.interestRate.error = '...';
       this.interestRate.wait = true;
       this.AsyncCalculateInterestRate()
-        .then(() => {
-          this.interestRate = new PositivePercent(this.value_rent.interestRate);
-        })
-        .catch((e) => {
-          this.interestRate.error = e.message;
-        })
         .finally(() => {
           this.interestRate.wait = false;
-        });
+        })
+        .then(
+          () => {
+            this.interestRate = new PositivePercent(this.value_rent.interestRate);
+          },
+          (e) => {
+            this.interestRate.error = e.message;
+          }
+        );
     }
   },
   watch: {
@@ -233,7 +235,7 @@ export default {
       if (this.calc_parameter.toString() === 'value_accruedRent') {
         return new Valute(this.value_accruedRent - this.value_rent.accruedRent);
       } else if (this.calc_parameter.toString() === 'value_presentValueOfPermanentRent') {
-        return new Valute(this.value_presentValueOfPermanentRent - this.value_rent.presentValueOfPermanentRent);
+        return new Valute(this.value_rent.presentValueOfPermanentRent - this.value_presentValueOfPermanentRent);
       } else {
         throw new Error("Неизвестный параметр");
       }
