@@ -1,5 +1,6 @@
 <template>
   <div class="page page-calculator">
+    <ScrollToCalculator />
     <h1 class="page__title">
       Сложные проценты
     </h1>
@@ -59,11 +60,15 @@
 
 <script>
 import PageCompoundCategoryForm from "@/components/pages/categories/compound/PageCompoundCategoryForm.vue";
+import ScrollToCalculator from "@/components/UI/ScrollToCalculator.vue";
 import { app} from "@/_config";
 
 export default {
   name: "PageCompoundCategory",
-  components: {PageCompoundCategoryForm},
+  components: {
+    PageCompoundCategoryForm,
+    ScrollToCalculator,
+  },
   data() {
     return {
       latex_fontsize: app.latex_fontsize,

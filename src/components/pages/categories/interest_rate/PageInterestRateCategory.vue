@@ -1,5 +1,6 @@
 <template>
   <div class="page page-calculator">
+    <ScrollToCalculator />
     <h1 class="page__title">
       Определение размера процентной ставки
     </h1>
@@ -64,12 +65,14 @@
 
 <script>
 import pageInterestRateCategoryForm from "@/components/pages/categories/interest_rate/PageInterestRateCategoryForm.vue";
+import ScrollToCalculator from "@/components/UI/ScrollToCalculator.vue";
 import {app} from "@/_config";
 
 export default {
   name: "PageInterestRateCategory",
   components: {
     pageInterestRateCategoryForm,
+    ScrollToCalculator,
   },
   data() {
     return {

@@ -1,5 +1,6 @@
 <template>
   <div class="page page-calculator">
+    <ScrollToCalculator />
     <h1 class="page__title">
       Оценивание инвестиций
     </h1>
@@ -158,12 +159,14 @@
 
 <script>
 import PageInvestmentsCategoryForm from "@/components/pages/categories/investments/PageInvestmentsCategoryForm.vue";
+import ScrollToCalculator from "@/components/UI/ScrollToCalculator.vue";
 import {app} from "@/_config";
 
 export default {
   name: "PageInvestmentsCategory",
   components: {
     PageInvestmentsCategoryForm,
+    ScrollToCalculator,
   },
   data() {
     return {

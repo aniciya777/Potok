@@ -24,7 +24,7 @@ export const app = {
   emails: [
     {
       name: 'Основной',
-      email: 'we_have_a_lot_of_money@mail.ru',
+      email: 'potokpotk@mail.ru',
     },
   ]
 }

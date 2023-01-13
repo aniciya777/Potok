@@ -1,5 +1,6 @@
 <template>
   <div class="page page-calculator">
+    <ScrollToCalculator />
     <h1 class="page__title">
       Простые проценты
     </h1>
@@ -59,11 +60,15 @@
 
 <script>
 import PageSimpleCategoryForm from "@/components/pages/categories/simple/PageSimpleCategoryForm.vue";
+import ScrollToCalculator from "@/components/UI/ScrollToCalculator.vue";
 import { app } from "@/_config.js";
 
 export default {
   name: "PageSimpleCategory",
-  components: {PageSimpleCategoryForm},
+  components: {
+    PageSimpleCategoryForm,
+    ScrollToCalculator,
+  },
   data() {
     return {
       latex_fontsize: app.latex_fontsize,

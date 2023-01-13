@@ -1,5 +1,6 @@
 <template>
   <div class="page page-calculator">
+    <ScrollToCalculator />
     <h1 class="page__title">
       Конверсии рент
     </h1>
@@ -50,10 +51,14 @@
 import { app} from "@/_config";
 import PageRentConversionsCategoryForm
   from "@/components/pages/categories/rent_conversions/PageRentConversionsCategoryForm.vue";
+import ScrollToCalculator from "@/components/UI/ScrollToCalculator.vue";
 
 export default {
   name: "PageRentConversionsCategory",
-  components: {PageRentConversionsCategoryForm},
+  components: {
+    PageRentConversionsCategoryForm,
+    ScrollToCalculator,
+  },
   data() {
     return {
       latex_fontsize: app.latex_fontsize,

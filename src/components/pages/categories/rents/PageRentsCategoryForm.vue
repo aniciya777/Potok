@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="form-calculator">
+    <div class="form-calculator" ref="calc">
       <hr>
       <h3 class="text-center">
         Расчёт параметров рент

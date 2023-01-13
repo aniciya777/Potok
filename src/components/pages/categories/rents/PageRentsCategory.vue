@@ -1,5 +1,6 @@
 <template>
   <div class="page page-calculator">
+    <ScrollToCalculator />
     <h1 class="page__title">
       Расчёт параметров рент
     </h1>
@@ -408,7 +409,9 @@
           <vue-latex :expression="'p > 1'" :fontsize="latex_fontsize"/>,
           <vue-latex :expression="'m > 1'" :fontsize="latex_fontsize"/>.
         </p>
-        <PageRentsCategoryForm/>
+        <div ref="calc">
+          <PageRentsCategoryForm/>
+        </div>
       </div>
     </div>
   </div>
@@ -416,12 +419,14 @@
 
 <script>
 import PageRentsCategoryForm from "@/components/pages/categories/rents/PageRentsCategoryForm.vue";
+import ScrollToCalculator from "@/components/UI/ScrollToCalculator.vue";
 import {app} from "@/_config";
 
 export default {
   name: "PageRentsCategory",
   components: {
-    PageRentsCategoryForm
+    PageRentsCategoryForm,
+    ScrollToCalculator
   },
   data() {
     return {
