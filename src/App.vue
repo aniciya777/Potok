@@ -16,8 +16,6 @@ import BreadCrumbs from "@/components/UI/BreadCrumbs.vue";
 </script>
 
 <style lang="scss">
-@import "@/assets/styles/main.scss";
-
 main.container {
   margin-top: 18px;
   margin-bottom: 32px;

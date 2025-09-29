@@ -1,0 +1,9 @@
+.idea/
+.vscode/
+dist/
+dist-desktop/
+node_modules
+.editorconfig
+.gitignore
+.dockerignore
+packager_installer.bat
